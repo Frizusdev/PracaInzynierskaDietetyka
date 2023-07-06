@@ -1,0 +1,93 @@
+﻿/* Mobile */
+@media (max-width: 600px) {
+    header {
+        display: none;
+    }
+
+    main {
+        overflow: none;
+        background-color: #132c43;
+        color: #c2d6d3;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        height: 81vh;
+        overflow: hidden;
+        height: 93vh;
+    }
+
+
+}
+
+/* PC */
+@media (min-width: 600px) {
+    main {
+        overflow: none;
+        background-color: #132c43;
+        color: #c2d6d3;
+        padding-top: 15px;
+        height: 87vh;
+        overflow: hidden;
+        padding-bottom: 15px;
+    }
+
+}
+
+/* All */
+
+main {
+    display: grid;
+    justify-content: center;
+}
+
+.dishgrid {
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    justify-content: center;
+    text-align: center;
+    display: grid;
+}
+
+.workgrid {
+    height: fit-content;
+    width: 100%;
+    overflow-y: scroll;
+    justify-content: center;
+    text-align: center;
+    display: grid;
+}
+
+.imgdroparea {
+    min-height: 15vh;
+    height: 20vh;
+    height: calc(8.5rem + 2px);
+    line-height: 1.25;
+    padding-top: 7rem;
+    padding-bottom: .625rem;
+}
+
+.form-floating > .imgdroparea:focus, .form-floating > .imgdroparea:not(:placeholder-shown) {
+    padding-top: 5.625rem;  
+}
+
+.form-floating > label {
+    padding: 4rem .75rem;
+}
+
+
+textarea {
+    resize: vertical;
+    min-height: 5vh;
+    overflow-wrap: break-word;
+}
+
+textarea {
+    width: 100%;
+}
+
+.choosebtn {
+    display: flex !important;
+    justify-content: space-between;
+    align-content: center;
+    height: fit-content;
+}

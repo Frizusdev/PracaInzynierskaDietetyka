@@ -1,0 +1,129 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <h2>Create a new account.</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                <label asp-for="Input.Email">Email</label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.Password">Password</label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <!-- Dodatkowe -->
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Height" class="form-control" autocomplete="new-Height" aria-required="true" inputmode="numeric" min="100" max="250" placeholder="Height" />
+                <label asp-for="Input.Height">Height</label>
+                <span asp-validation-for="Input.Height" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Weight" class="form-control" autocomplete="new-Weight" aria-required="true" inputmode="numeric" min="10" max="350" placeholder="Weight" />
+                <label asp-for="Input.Weight">Weight</label>
+                <span asp-validation-for="Input.Weight" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.First_Name" class="form-control" autocomplete="new-First-Name" aria-required="true" placeholder="First Name" />
+                <label asp-for="Input.First_Name">First Name</label>
+                <span asp-validation-for="Input.First_Name" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Last_Name" class="form-control" autocomplete="new-Last-Name" aria-required="true" placeholder="Last Name" />
+                <label asp-for="Input.Last_Name">Last Name</label>
+                <span asp-validation-for="Input.Last_Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <select asp-for="Input.Wish_Weight">
+                    <option>Lose on Weight</option>
+                    <option>Stay on Weight</option>
+                    <option>Gain on Weight</option>
+                </select>
+            </div>
+
+            <div class="form-floating mb-3">
+                <select asp-for="Input.Activity">
+                    <option value="1.2">No Activity</option>
+                    <option value="1.4">Light Activity 140min of activity</option>
+                    <option value="1.6">Medium Activity 280min of activity</option>
+                    <option value="1.8">High Activity 420min of activity</option>
+                    <option value="2.0">Very High Activity 560min of activity</option>
+                </select>
+            </div>
+
+            <div class="form-floating mb-3">
+                <select asp-for="Input.Sex">
+                    <option>Men</option>
+                    <option>Woman</option>
+                </select>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Age" class="form-control" autocomplete="new-Age" aria-required="true" placeholder="Age" inputmode="numeric" min="18" max="150" />
+                <label asp-for="Input.Age">Age</label>
+                <span asp-validation-for="Input.Age" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Extras" class="form-control" autocomplete="new-Extras" aria-required="true" placeholder="Czego nie lubisz uczulenia etc." />
+                <label asp-for="Input.Extras">Czego nie lubisz uczulenia etc.</label>
+                <span asp-validation-for="Input.Extras" class="text-danger"></span>
+            </div>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+        </form>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <h3>Use another service to register.</h3>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                                article
+                                about setting up this ASP.NET application to support logging in via external services
+                            </a>.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins!)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

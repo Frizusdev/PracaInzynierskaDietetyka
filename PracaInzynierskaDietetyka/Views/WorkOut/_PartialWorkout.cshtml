@@ -1,0 +1,67 @@
+﻿@model WorkoutConnector
+
+@if (User.IsInRole("Dietetyk"))
+{
+    <span class="name" data-value="@Model.macro.Email">@Model.macro.First_Name @Model.macro.Last_Name</span>
+}
+    @if (User.IsInRole("Member"))
+{
+            <style>
+                .month {
+                    padding: 0;
+                    margin: 0;
+                }
+                .date {
+                    padding: 0;
+                }
+            </style>
+}
+
+<div id="addwork" class="addwork">
+    <p id="p_addexercise"> + Dodaj Ćwiczenie</p>
+</div>
+<div id="aboutexercise" class="aboutexercise">
+    <button id="backaboutexercise">Back</button><br />
+    <span>Nazwa Ćwiczenia: </span><br />
+    <input id="exercisename" /><br />
+    <div id="exercises" class="exercises" style="display: none;">
+        <ul>
+        </ul>
+    </div>
+    <span>Serii:</span><br />
+    <input id="times" /><br />
+    <span>Po:</span><br />
+    <input id="reps" /><br />
+    <br />
+    <span>Przerwy:</span><br />
+    <input id="brake" /><br />
+    <button id="addexercise">Dodaj</button>
+</div>
+
+@if (Model.exercises.Any())
+{
+    <p>Workout: </p>
+    <div class="workoutgrid" id="workoutgrid">
+        <ul>
+            @foreach (var x in Model.exercises)
+            {
+                <li>
+                    @if (x.Img_Path == "")
+                        {
+                        <img src="/img/workoutimg/error.png" />
+                    }
+                    else
+                    {
+                        <img src="@("/img/workoutimg/" + x.Img_Path )" />
+                    }
+                    <h2 data-id="@x.Exercise_ID">@x.Exercise_Name</h2>
+                    <span>@x.Times x @x.Reps Pause: @x.Pause_Time</span>
+                </li>
+            }
+        </ul>
+    </div>
+}
+else
+{
+    <p> Pusto Workout </p>
+}

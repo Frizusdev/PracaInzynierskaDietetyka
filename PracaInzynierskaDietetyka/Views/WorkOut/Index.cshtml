@@ -1,0 +1,113 @@
+﻿@model WorkoutConnector
+
+<link rel="stylesheet" href="../css/workoutCSSFile.css" />
+<script defer src="../js/workoutJSFILE.js"></script>
+
+<h2>Zaloguj się sadek</h2>
+
+@if (User.IsInRole("Dietetyk"))
+{
+    <div id="nav-icon1">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+
+    <div class="AboutUserView" id="AboutUserView" style="display: none;">
+        <div>
+            <button id="AboutUserViewBackbtn">Back</button>
+            <br />
+            <span>Imię i Nazwisko: </span>
+            <p id="name" data-value=""></p>
+            <span>Płeć: </span>
+            <p id="sex"></p>
+            <span>Wiek: </span>
+            <p id="age"></p>
+            <span>Wzrost: </span>
+            <p id="height"></p>
+            <span>Waga: </span>
+            <p id="weight"></p>
+            <span>Cel: </span>
+            <p id="wish_weight"></p>
+            <span>Dodatkowe informacje: </span>
+            <p id="extras"></p>
+        </div>
+        <div>
+            <span>Kcal: </span>
+            <p id="kcal"></p>
+            <div class="form-floating mb-3">
+                <input id="kcalchange" name="name" class="form-control" type="number" />
+                <label>Kcal</label>
+            </div>
+            <span>Białko: </span>
+            <p id="prot"></p>
+            <div class="form-floating mb-3">
+                <input id="protchange" name="name" class="form-control" type="number" />
+                <label>Białko</label>
+            </div>
+            <span>Tłuszcz: </span>
+            <p id="fat"></p>
+            <div class="form-floating mb-3">
+                <input id="fatchange" name="name" class="form-control" type="number" />
+                <label>Tłuszcz</label>
+            </div>
+            <span>Węglowodany: </span>
+            <p id="carb"></p>
+            <div class="form-floating mb-3">
+                <input id="carbchange" name="name" class="form-control" type="number" />
+                <label>Węglowodany</label>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="Userscontainer">
+        <h1>Podopieczni:</h1>
+        <ul id="users">
+            @foreach (var x in Model.userlist)
+            {
+                <li data-value="@x.Email"><span>@x.First_Name @x.Last_Name </span><button class="userdetails" data-email="@x.Email">i</button></li>
+            }
+        </ul>
+        <div class="p-3 form-floating mb-3">
+            <input id="addnewpersoninput" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+            <label class="p-4">Email</label>
+            <span class="text-danger"></span>
+            <br />
+            <button id="addnewpersonbtn">Add new person</button>
+        </div>
+    </div>
+
+    <div class="date" id="date">
+        <span class="month" id="month"></span>
+        <div data-id="1" data-date="" id="mon" class="days"><span>P</span><p></p></div>
+        <div data-id="2" data-date="" id="tue" class="days"><span>W</span><p></p></div>
+        <div data-id="3" data-date="" id="wed" class="days"><span>Ś</span><p></p></div>
+        <div data-id="4" data-date="" id="thu" class="days"><span>C</span><p></p></div>
+        <div data-id="5" data-date="" id="fri" class="days"><span>P</span><p></p></div>
+        <div data-id="6" data-date="" id="sat" class="days"><span>S</span><p></p></div>
+        <div data-id="7" data-date="" id="sun" class="days"><span>N</span><p></p></div>
+    </div>
+
+    <div class="partial" id="partialworkout">
+        <partial name="_PartialWorkout" />
+    </div>
+}
+@if (User.IsInRole("Member"))
+{
+    <div class="date" id="date">
+        <span class="month" id="month"></span>
+        <div data-id="1" data-date="" id="mon" class="days"><span>P</span><p></p></div>
+        <div data-id="2" data-date="" id="tue" class="days"><span>W</span><p></p></div>
+        <div data-id="3" data-date="" id="wed" class="days"><span>Ś</span><p></p></div>
+        <div data-id="4" data-date="" id="thu" class="days"><span>C</span><p></p></div>
+        <div data-id="5" data-date="" id="fri" class="days"><span>P</span><p></p></div>
+        <div data-id="6" data-date="" id="sat" class="days"><span>S</span><p></p></div>
+        <div data-id="7" data-date="" id="sun" class="days"><span>N</span><p></p></div>
+    </div>
+
+    <div id="partialworkout" class="partial">
+        <partial name="_PartialWorkout" />
+    </div>
+}

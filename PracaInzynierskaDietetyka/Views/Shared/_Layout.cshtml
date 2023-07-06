@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PracaInzynierskaDietetyka</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PracaInzynierskaDietetyka.styles.css" asp-append-version="true" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PracaInzynierskaDietetyka</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div id="buttons" class="buttons">
+            <div class="diet"><a asp-area="" asp-controller="Home" asp-action="Index"><img src="~/img/diet_list.png" /></a></div>
+            <div class="workout"><a asp-area="" asp-controller="WorkOut" asp-action="WorkOutPage"><img src="~/img/workout.gif" /></a></div>
+            <div class="adddish"><a asp-area="" asp-controller="NewDish" asp-action="NewDishPage"><img src="~/img/adddish.png" /></a></div>
+            <div class="settings"><a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><img src="~/img/settings.png" /></a></div>
+        </div>
+    }
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

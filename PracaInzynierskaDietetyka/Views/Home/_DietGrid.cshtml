@@ -1,0 +1,36 @@
+﻿@model Connector
+
+<p id="userchosen" class="userchosen" data-choose="@Model.macro.Email">@Model.macro.First_Name @Model.macro.Last_Name</p>
+
+@foreach (var u in Model.dish_types)
+{
+    <div class="grid">
+        <div class="title">
+            <h2>@u.Dish_Time</h2>
+            <span id="sum">Suma Makro</span>
+            <button class="adder" id="adder" data-status="true" data-dishtypeID="@u.DishType_ID">+</button>
+        </div>
+        @foreach (var x in Model.diet.Where(a => a.DishType_ID == u.DishType_ID))
+        {
+            <div class="gridbody">
+                <span data-kcal="@Math.Abs(x.Kcal * x.Weight)" data-protein="@Math.Abs(x.Protein * x.Weight)" data-fat="@Math.Abs(x.Fat * x.Weight)" data-carbon="@Math.Abs(x.Carbon * x.Weight) ">
+                    @x.Dish_Name | Kcal: @Math.Abs(x.Kcal * x.Weight) | P: @Math.Abs(x.Protein * x.Weight)  | F: @Math.Abs(x.Fat * x.Weight)  | C: @Math.Abs(x.Carbon * x.Weight)
+                </span>
+                <button class="delete" data-dishID="@x.Dish_ID" data-dysh_typeID="@x.DishType_ID" data-conID="@x.ID">Delete</button>
+                <br />
+            </div>
+        }
+    </div>
+}
+@if (User.IsInRole("Dietetyk"))
+{
+
+    <script>
+    $(document).ready(function () {
+        $("#kcalwant").text(@Model.macro.Kcal);
+        $("#protwant").text(@Model.macro.Protein);
+        $("#fattwant").text(@Model.macro.Fat);
+        $("#carbwant").text(@Model.macro.Carbon);
+    });
+    </script>
+}

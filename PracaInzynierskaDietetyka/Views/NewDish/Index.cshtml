@@ -1,0 +1,91 @@
+﻿<link rel="stylesheet" href="../css/newdishCSSFile.css" />
+<script defer src="../js/newdishJSFILE.js"></script>
+
+<meta charset="utf-8" />
+@if (User.Identity.IsAuthenticated)
+{
+        <div class="choosebtn">
+            <button id="showdishgrid" class="w-100 btn btn-lg btn-primary">Jedzenie</button>
+            
+            <button id="showexercisegrid" class="w-100 btn btn-lg btn-primary">Ćwiczenie</button>
+        </div>
+
+        <div class="dishgrid">
+
+            <form method="post" enctype="multipart/form-data" asp-controller="NewDish" asp-action="AddNewDish" id="dishform">
+                <div class="form-floating mb-3">
+                    <p>Nazwa Dania:</p>
+                    <input id="dishname" name="name" class="form-control" aria-required="true" type="text" />
+                    <label>Nazwa Dania</label>
+                    <span id="disherror" style="display: none;" class="text-danger">Taka Nazwa Dania Już istnieje</span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <p>Opis Dania:</p>
+                    <textarea name="desc" class="form-control textarea" aria-required="true" type="text"></textarea>
+                    <label>Opis Dania</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <p>Waga Dania:</p>
+                    <input name="weight" class="form-control" aria-required="true" type="number" />
+                    <label>Opis Dania</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <p>Kcal Dania:</p>
+                    <input name="kcal" class="form-control" aria-required="true" type="number" />
+                    <label>Kcal Dania</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <p>Białko Dania:</p>
+                    <input name="protein" class="form-control" aria-required="true" type="number" />
+                    <label>Białko Dania</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <p>Tłuszcz Dania:</p>
+                    <input name="fat" class="form-control" aria-required="true" type="number" />
+                    <label>Tłuszcz Dania</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <p>Węgle Dania:</p>
+                    <input name="carbon" class="form-control" aria-required="true" type="number" />
+                    <label>Węgle Dania</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <p>Zdjęcie:</p>
+                    <input name="postedFiles" class="form-control imgdroparea" type="file" multiple />
+                    <label>Wybierz lub upuść zdjecie</label>
+                </div>
+            </form>
+            <button id="addDish" class="w-100 btn btn-lg btn-primary">Dodaj Danie</button>
+        </div>
+
+        <div class="workgrid">
+            <form method="post" enctype="multipart/form-data" asp-controller="NewDish" asp-action="AddNewExercise" id="exerciseform">
+                <div class="form-floating mb-3">
+                    <p>Nazwa Ćwiczenia:</p>
+                    <input id="exercisename" name="name" class="form-control" aria-required="true" type="text" />
+                    <label>Nazwa Ćwiczenie</label>
+                    <span id="exerciseerror" style="display: none;" class="text-danger">Nazwa Ćwiczenia Już Isnieje</span>
+                </div>
+                <div class="form-floating mb-3">
+                    <p>Opis Ćwiczenia:</p>
+                    <input name="desc" class="form-control" aria-required="true" type="text" />
+                    <label>Opis Ćwiczenia</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <p>Zdjęcie:</p>
+                    <input name="postedFiles" class="form-control imgdroparea" type="file" />
+                    <label>Wybierz lub upuść zdjecie</label>
+                </div>
+            </form>
+
+            <button id="addExercise" class="w-100 btn btn-lg btn-primary">Dodaj Ćwiczenie</button>
+            <!--<button id="addExercise">Dodaj Ćwiczenie</button>-->
+        </div>
+}

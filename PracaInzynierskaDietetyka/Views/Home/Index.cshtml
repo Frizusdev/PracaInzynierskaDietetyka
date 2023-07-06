@@ -1,0 +1,252 @@
+﻿@model Connector
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (User.IsInRole("Dietetyk"))
+{
+    <link rel="stylesheet" href="../css/IndexCSSFile.css" />
+    <script defer src="../js/IndexJSFILE.js"></script>
+    <div id="nav-icon1">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="AboutUserView" id="AboutUserView" style="display: none;">
+        <div>
+            <button id="AboutUserViewBackbtn">Back</button>
+            <br />
+            <span>Imię i Nazwisko: </span>
+            <p id="name" data-value=""></p>
+            <span>Płeć: </span>
+            <p id="sex"></p>
+            <span>Wiek: </span>
+            <p id="age"></p>
+            <span>Wzrost: </span>
+            <p id="height"></p>
+            <span>Waga: </span>
+            <p id="person_weight"></p>
+            <span>Cel: </span>
+            <p id="wish_weight"></p>
+            <span>Dodatkowe informacje: </span>
+            <p id="extras"></p>
+        </div>
+        <div>
+            <span>Kcal: </span>
+            <p id="kcal"></p>
+            <div class="form-floating mb-3">
+                <input id="kcalchange" name="name" class="form-control" type="number" />
+                <label>Kcal</label>
+            </div>
+            <span>Białko: </span>
+            <p id="prot"></p>
+            <div class="form-floating mb-3">
+                <input id="protchange" name="name" class="form-control" type="number" />
+                <label>Białko</label>
+            </div>
+            <span>Tłuszcz: </span>
+            <p id="fat"></p>
+            <div class="form-floating mb-3">
+                <input id="fatchange" name="name" class="form-control" type="number" />
+                <label>Tłuszcz</label>
+            </div>
+            <span>Węglowodany: </span>
+            <p id="carb"></p>
+            <div class="form-floating mb-3">
+                <input id="carbchange" name="name" class="form-control" type="number" />
+                <label>Węglowodany</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="Userscontainer">
+        <h1>Podopieczni:</h1>
+        <ul id="users">
+            @foreach (var x in Model.userlist)
+            {
+                <li data-value="@x.Email"><span>@x.First_Name @x.Last_Name </span><button class="userdetails" data-email="@x.Email">i</button></li>
+            }
+        </ul>
+        <div class="p-3 form-floating mb-3">
+            <input id="addnewpersoninput" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+            <label class="p-4">Email</label>
+            <span class="text-danger"></span>
+            <br />
+            <button id="addnewpersonbtn">Add new person</button>
+        </div>
+    </div>
+
+    <div class="search">
+        <button id="backbtnsearch">Back</button>
+        <br />
+        <input type="text" id="dish_name" data-dishtypeID="" />
+        <ul class="dish_list">
+        </ul>
+    </div>
+
+    <div class="dishDetail">
+        <button class="dishDetailBackBtn">Back</button>
+        <br />
+        <ul class="dishDetail_list">
+        </ul>
+    </div>
+
+    <div class="date" id="date">
+        <span class="month" id="month" data-id="GUID"></span>
+        <div data-id="1" data-date="" id="mon" class="days"><span>P</span><p></p></div>
+        <div data-id="2" data-date="" id="tue" class="days"><span>W</span><p></p></div>
+        <div data-id="3" data-date="" id="wed" class="days"><span>Ś</span><p></p></div>
+        <div data-id="4" data-date="" id="thu" class="days"><span>C</span><p></p></div>
+        <div data-id="5" data-date="" id="fri" class="days"><span>P</span><p></p></div>
+        <div data-id="6" data-date="" id="sat" class="days"><span>S</span><p></p></div>
+        <div data-id="7" data-date="" id="sun" class="days"><span>N</span><p></p></div>
+    </div>
+
+    <div class="partial" id="partial">
+        <partial name="_DietGrid" />
+    </div>
+
+    <div class="progress" id="progress">
+        <div id="Kcal" class="kcal">
+            <div class="backbar">
+                <div id="kcalbar" class="bar">
+
+                </div>
+            </div>
+            <p>Kcal</p>
+            <span id="kcalnow">0</span>
+            <span> / </span>
+            <span id="kcalwant">@Model.macro.Kcal</span>
+        </div>
+        <div id="Protein" class="kcal">
+            <div class="backbar">
+                <div id="protbar" class="bar">
+
+                </div>
+            </div>
+            <p>Białko: </p>
+            <span class="tester" id="prot">0</span>
+            <span>g</span>
+            <span> / </span>
+            <span id="protwant">@Model.macro.Protein</span>
+            <span>g</span>
+        </div>
+        <div id="Fat" class="kcal">
+            <div class="backbar">
+                <div id="fattbar" class="bar">
+
+                </div>
+            </div>
+            <p>Tłuszcz: </p>
+            <span id="fatt">0</span>
+            <span>g</span>
+            <span> / </span>
+            <span id="fattwant">@Model.macro.Fat</span>
+            <span>g</span>
+        </div>
+        <div id="Carbo" class="kcal">
+            <div class="backbar">
+                <div id="carbbar" class="bar">
+
+                </div>
+            </div>
+            <p>Węgle: </p>
+            <span class="testercarb" id="carb">0</span>
+            <span>g</span>
+            <span> / </span>
+            <span id="carbwant">@Model.macro.Carbon</span>
+            <span>g</span>
+        </div>
+    </div>
+
+}
+@if (User.IsInRole("Member"))
+{
+    <link rel="stylesheet" href="../css/IndexCSSFile.css" />
+    <script defer src="../js/IndexJSFILE.js"></script>
+    <div class="search">
+        <button id="backbtnsearch">Back</button>
+        <br />
+        <input type="text" id="dish_name" data-dishtypeID="" />
+        <ul class="dish_list">
+        </ul>
+    </div>
+
+    <div class="dishDetail">
+        <button class="dishDetailBackBtn">Back</button>
+        <br />
+        <ul class="dishDetail_list">
+        </ul>
+    </div>
+
+    <div class="date" id="date">
+        <span class="month" id="month" data-id="GUID"></span>
+        <div data-id="1" data-date="" id="mon" class="days"><span>P</span><p></p></div>
+        <div data-id="2" data-date="" id="tue" class="days"><span>W</span><p></p></div>
+        <div data-id="3" data-date="" id="wed" class="days"><span>Ś</span><p></p></div>
+        <div data-id="4" data-date="" id="thu" class="days"><span>C</span><p></p></div>
+        <div data-id="5" data-date="" id="fri" class="days"><span>P</span><p></p></div>
+        <div data-id="6" data-date="" id="sat" class="days"><span>S</span><p></p></div>
+        <div data-id="7" data-date="" id="sun" class="days"><span>N</span><p></p></div>
+    </div>
+
+    <div class="partial" id="partial">
+        <partial name="_DietGrid" />
+    </div>
+
+    <div class="progress" id="progress">
+        <div id="Kcal" class="kcal">
+            <div class="backbar">
+                <div id="kcalbar" class="bar">
+
+                </div>
+            </div>
+            <p>Kcal</p>
+            <span id="kcalnow">0</span>
+            <span> / </span>
+            <span id="kcalwant">@Model.macro.Kcal</span>
+        </div>
+        <div id="Protein" class="kcal">
+            <div class="backbar">
+                <div id="protbar" class="bar">
+
+                </div>
+            </div>
+            <p>Białko: </p>
+            <span class="tester" id="prot">0</span>
+            <span>g</span>
+            <span> / </span>
+            <span id="protwant">@Model.macro.Protein</span>
+            <span>g</span>
+        </div>
+        <div id="Fat" class="kcal">
+            <div class="backbar">
+                <div id="fattbar" class="bar">
+
+                </div>
+            </div>
+            <p>Tłuszcz: </p>
+            <span id="fatt">0</span>
+            <span>g</span>
+            <span> / </span>
+            <span id="fattwant">@Model.macro.Fat</span>
+            <span>g</span>
+        </div>
+        <div id="Carbo" class="kcal">
+            <div class="backbar">
+                <div id="carbbar" class="bar">
+
+                </div>
+            </div>
+            <p>Węgle: </p>
+            <span class="testercarb" id="carb">0</span>
+            <span>g</span>
+            <span> / </span>
+            <span id="carbwant">@Model.macro.Carbon</span>
+            <span>g</span>
+        </div>
+    </div>
+
+}
+
